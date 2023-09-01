@@ -1,0 +1,281 @@
+{
+    "tabs": [
+        "erc20",
+        "erc721",
+        "erc1155"
+    ],
+    "accessControl": [
+        "Ownable",
+        "Roles"
+    ],
+    "upgradeability": [
+        "Transparent",
+        "UUPS"
+    ],
+    "mintable": {
+        "imports": "import \"@openzeppelin\/contracts\/access\/Ownable.sol\";\r\n",
+        "erc20": {
+            "functions": "function mint(address to, uint256 amount) public onlyOwner {\r\n          _mint(to, amount);\r\n    }\r\n"
+        },
+        "erc721": {
+            "functions": "function safeMint(address to, uint256 tokenId) public onlyOwner {\r\n        _safeMint(to, tokenId);\r\n    }\r\n"
+        },
+        "erc1155": {
+            "functions": "function mint(address account, uint256 id, uint256 amount, bytes memory data)\r\n        public\r\n        onlyOwner\r\n    {\r\n        _mint(account, id, amount, data);\r\n    }\r\n\r\n    function mintBatch(address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data)\r\n        public\r\n        onlyOwner\r\n    {\r\n        _mintBatch(to, ids, amounts, data);\r\n    }\r\n"
+        }
+    },
+    "functionComment": "\/\/ The following functions are overrides required by Solidity.\r\n",
+    "Transparent": {
+        "imports": "import \"@openzeppelin\/contracts-upgradeable\/proxy\/utils\/Initializable.sol\";\r\n",
+        "comments": "\/\/\/ @custom:oz-upgrades-unsafe-allow constructor\r\n",
+        "constructors": "_disableInitializers();\r\n",
+        "inheritance": [
+            "Initializable"
+        ],
+        "Ownable": {
+            "imports": "import \"@openzeppelin\/contracts-upgradeable\/access\/OwnableUpgradeable.sol\";\r\n",
+            "inheritance": [
+                "OwnableUpgradeable"
+            ],
+            "erc20Function": "function initialize() initializer public {\r\n        __ERC20_init(\"MyToken\", \"MTK\");\r\n        __Ownable_init();\r\n    }\r\n",
+            "erc721Function": "function initialize() initializer public {\r\n        __ERC721_init(\"MyToken\", \"MTK\");\r\n        __Ownable_init();\r\n    }\r\n",
+            "erc1155Function": "function initialize() initializer public {\r\n        __ERC1155_init(\"\");\r\n        __Ownable_init();\r\n    }\r\n"
+        },
+        "Roles": {
+            "imports": "import \"@openzeppelin\/contracts-upgradeable\/access\/AccessControlUpgradeable.sol\";\r\n",
+            "inheritance": [
+                "AccessControlUpgradeable"
+            ],
+            "erc20Function": "function initialize() initializer public {\r\n        __ERC20_init(\"MyToken\", \"MTK\");\r\n        __AccessControl_init();\r\n\r\n        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);\r\n    }\r\n",
+            "erc721Function": "function initialize() initializer public {\r\n        __ERC721_init(\"MyToken\", \"MTK\");\r\n        __AccessControl_init();\r\n\r\n        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);\r\n    }\r\n",
+            "erc1155Function": "function initialize() initializer public {\r\n        __ERC1155_init(\"\");\r\n        __AccessControl_init();\r\n\r\n        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);\r\n    }\r\n"
+        },
+        "erc20": {
+            "imports": "import \"@openzeppelin\/contracts-upgradeable\/token\/ERC20\/ERC20Upgradeable.sol\";\r\n",
+            "functions": "function initialize() initializer public {\r\n        __ERC20_init(\"MyToken\", \"MTK\");\r\n    }\r\n",
+            "inheritance": [
+                "ERC20Upgradeable"
+            ]
+        },
+        "erc721": {
+            "imports": "import \"@openzeppelin\/contracts-upgradeable\/token\/ERC721\/ERC721Upgradeable.sol\";",
+            "functions": "function initialize() initializer public {\r\n        __ERC721_init(\"MyToken\", \"MTK\");\r\n    }",
+            "inheritance": [
+                "ERC721Upgradeable"
+            ]
+        },
+        "erc1155": {
+            "imports": "import \"@openzeppelin\/contracts-upgradeable\/token\/ERC1155\/ERC1155Upgradeable.sol\";",
+            "functions": "function initialize() initializer public {\r\n        __ERC1155_init(\"\");\r\n    }",
+            "inheritance": [
+                "ERC1155Upgradeable"
+            ]
+        }
+    },
+    "UUPS": {
+        "Ownable": {
+            "imports": "import \"@openzeppelin\/contracts-upgradeable\/token\/ERC20\/ERC20Upgradeable.sol\";\r\nimport \"@openzeppelin\/contracts-upgradeable\/access\/OwnableUpgradeable.sol\";\r\nimport \"@openzeppelin\/contracts-upgradeable\/proxy\/utils\/Initializable.sol\";\r\nimport \"@openzeppelin\/contracts-upgradeable\/proxy\/utils\/UUPSUpgradeable.sol\";\r\n",
+            "inheritance": [
+                "Initializable",
+                "ERC20Upgradeable",
+                "OwnableUpgradeable",
+                "UUPSUpgradeable"
+            ],
+            "comments": "/// @custom:oz-upgrades-unsafe-allow constructor",
+            "constructors": "_disableInitializers();\n",
+            "functions": "function initialize() initializer public {\r\n        __ERC20_init(\"MyToken\", \"MTK\");\r\n        __Ownable_init();\r\n        __UUPSUpgradeable_init();\r\n    }\r\n\r\n    function _authorizeUpgrade(address newImplementation)\r\n        internal\r\n        onlyOwner\r\n        override\r\n    {}\r\n"
+        },
+        "Roles": {
+            "imports": "import \"@openzeppelin\/contracts-upgradeable\/token\/ERC20\/ERC20Upgradeable.sol\";\r\nimport \"@openzeppelin\/contracts-upgradeable\/access\/AccessControlUpgradeable.sol\";\r\nimport \"@openzeppelin\/contracts-upgradeable\/proxy\/utils\/Initializable.sol\";\r\nimport \"@openzeppelin\/contracts-upgradeable\/proxy\/utils\/UUPSUpgradeable.sol\";\r\n",
+            "inheritance": [
+                "Initializable",
+                "ERC20Upgradeable",
+                "AccessControlUpgradeable",
+                "UUPSUpgradeable"
+            ],
+            "comments": "\/\/\/ @custom:oz-upgrades-unsafe-allow constructor\r\n",
+            "constructors": "_disableInitializers();",
+            "functions": "function initialize() initializer public {\r\n        __ERC20_init(\"MyToken\", \"MTK\");\r\n        __AccessControl_init();\r\n        __UUPSUpgradeable_init();\r\n\r\n        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);\r\n        _grantRole(UPGRADER_ROLE, msg.sender);\r\n    }\r\n\r\n    function _authorizeUpgrade(address newImplementation)\r\n        internal\r\n        onlyRole(UPGRADER_ROLE)\r\n        override\r\n    {}\r\n"
+        }
+    },
+    "burnable": {
+        "erc20": {
+            "imports": "import \"@openzeppelin\/contracts\/token\/ERC20\/extensions\/ERC20Burnable.sol\";\r\n",
+            "inheritance": [
+                "ERC20Burnable"
+            ]
+        },
+        "erc721": {
+            "imports": "import \"@openzeppelin\/contracts\/token\/ERC721\/extensions\/ERC721Burnable.sol\";\r\n",
+            "inheritance": [
+                "ERC721Burnable "
+            ]
+        },
+        "erc1155": {
+            "imports": "import \"@openzeppelin\/contracts\/token\/ERC1155\/extensions\/ERC1155Burnable.sol\";\r\n",
+            "inheritance": [
+                "ERC1155Burnable"
+            ]
+        }
+    },
+    "pausable": {
+        "imports": "import \"@openzeppelin\/contracts\/security\/Pausable.sol\";\r\n ",
+        "functions": "function pause() public onlyOwner {\r\n        _pause();\r\n    }\r\n\r\n    function unpause() public onlyOwner {\r\n        _unpause();\r\n    }\r\n",
+        "inheritance": [
+            "Pausable"
+        ],
+        "erc20": {
+            "lastFunctions": "function _beforeTokenTransfer(address from, address to, uint256 amount) internal whenNotPaused override {\r\n        super._beforeTokenTransfer(from, to, amount);\r\n    }\r\n"
+        },
+        "erc721": {
+            "lastFunctions": "function _beforeTokenTransfer(address from, address to, uint256 tokenId, uint256 batchSize)\r\n        internal\r\n        whenNotPaused\r\n        override\r\n    {\r\n        super._beforeTokenTransfer(from, to, tokenId, batchSize);\r\n    }\r\n"
+        }
+    },
+    "votes": {
+        "erc20": {
+            "constructorExt": "ERC20Permit",
+            "imports": "import \"@openzeppelin\/contracts\/token\/ERC20\/extensions\/draft-ERC20Permit.sol\";\r\n  import \"@openzeppelin\/contracts\/token\/ERC20\/extensions\/ERC20Votes.sol\";\r\n",
+            "lastFunctions": "function _afterTokenTransfer(address from, address to, uint256 amount) internal override(ERC20, ERC20Votes)\r\n    {\r\n        super._afterTokenTransfer(from, to, amount);\r\n    }\r\n\r\n    function _mint(address to, uint256 amount) internal override(ERC20, ERC20Votes)\r\n    {\r\n        super._mint(to, amount);\r\n    }\r\n\r\n    function _burn(address account, uint256 amount) internal override(ERC20, ERC20Votes)\r\n    {\r\n        super._burn(account, amount);\r\n    }\r\n",
+            "inheritance": [
+                "ERC20Permit",
+                "ERC20Votes"
+            ]
+        },
+        "erc721": {
+            "constructorExt": "EIP712",
+            "imports": "import \"@openzeppelin\/contracts\/utils\/cryptography\/draft-EIP712.sol\";\r\n  import \"@openzeppelin\/contracts\/token\/ERC721\/extensions\/draft-ERC721Votes.sol\";\r\n",
+            "inheritance": [
+                "EIP712",
+                "ERC721Votes"
+            ],
+            "lastFunctions": "function _afterTokenTransfer(address from, address to, uint256 tokenId, uint256 batchSize)\r\n        internal\r\n        override(ERC721, ERC721Votes)\r\n    {\r\n        super._afterTokenTransfer(from, to, tokenId, batchSize);\r\n    }\r\n"
+        }
+    },
+    "Ownable": {
+        "imports": "import \"@openzeppelin\/contracts\/access\/Ownable.sol\";\r\n",
+        "inheritance": [
+            "Ownable"
+        ]
+    },
+    "Roles": {
+        "imports": "import \"@openzeppelin\/contracts\/access\/AccessControl.sol\";\r\n",
+        "inheritance": [
+            "AccessControl"
+        ],
+        "constructors": {
+            "mintable": [
+                "_grantRole(MINTER_ROLE, msg.sender);\r\n",
+                "bytes32 public constant MINTER_ROLE = keccak256(\"MINTER_ROLE\");\r\n"
+            ],
+            "snapshot": [
+                "_grantRole(SNAPSHOT_ROLE, msg.sender);\r\n",
+                "bytes32 public constant SNAPSHOT_ROLE = keccak256(\"SNAPSHOT_ROLE\");\r\n"
+            ],
+            "pausable": [
+                "_grantRole(PAUSER_ROLE, msg.sender);\r\n",
+                "bytes32 public constant PAUSER_ROLE = keccak256(\"PAUSER_ROLE\");\r\n"
+            ],
+            "main": "_grantRole(DEFAULT_ADMIN_ROLE, msg.sender);\r\n"
+        },
+        "functions": "function supportsInterface(bytes4 interfaceId)\r\n        public\r\n        view\r\n        override(ERC721, AccessControl)\r\n        returns (bool)\r\n    {\r\n        return super.supportsInterface(interfaceId);\r\n    }\r\n"
+    },
+    "erc20": {
+        "permit": {
+            "constructorExt": "ERC20Permit",
+            "imports": "import \"@openzeppelin\/contracts\/token\/ERC20\/extensions\/draft-ERC20Permit.sol\";\r\n",
+            "inheritance": [
+                "ERC20Permit "
+            ]
+        },
+        "features": [
+            "Mintable",
+            "Burnable",
+            "Pausable",
+            "Permit",
+            "Votes",
+            "Flash Minting",
+            "Snapshots"
+        ],
+        "constructorExt": "ERC20",
+        "mainImport": "import \"@openzeppelin/contracts/token/ERC20/ERC20.sol\";\r\n",
+        "inheritance": [
+            "ERC20"
+        ],
+        "flashMinting": {
+            "imports": "import \"@openzeppelin\/contracts\/token\/ERC20\/extensions\/ERC20FlashMint.sol\";\r\n",
+            "inheritance": [
+                "ERC20FlashMint"
+            ]
+        },
+        "snapshots": {
+            "imports": "import \"@openzeppelin\/contracts\/token\/ERC20\/extensions\/ERC20Snapshot.sol\";\r\n",
+            "functions": "function snapshot() public onlyOwner {\r\n          _snapshot();\r\n    }\r\n",
+            "lastFunctions": "function _beforeTokenTransfer(address from, address to, uint256 amount)\r\n        internal\r\n        override(ERC20, ERC20Snapshot) {\r\n            super._beforeTokenTransfer(from, to, amount);\r\n    }\r\n",
+            "inheritance": [
+                "ERC20Snapshot"
+            ]
+        }
+    },
+    "erc721": {
+        "features": [
+            "Mintable",
+            "Auto Increments Ids",
+            "Burnable",
+            "Pausable",
+            "Votes",
+            "Enumerable",
+            "URI Storage"
+        ],
+        "AccessControl": [
+            "Ownable",
+            "Roles"
+        ],
+        "mainImport": "import \"@openzeppelin\/contracts\/token\/ERC721\/ERC721.sol\";\r\n",
+        "constructorExt": "ERC721",
+        "inheritance": [
+            "ERC721"
+        ],
+        "baseURI": "function _baseURI() internal pure override returns (string memory) {\r\n        return \"${baseURI}\";\r\n    }\r\n",
+        "autoIncrementIds": {
+            "imports": "import \"@openzeppelin\/contracts\/utils\/Counters.sol\";\r\n",
+            "variables": "using Counters for Counters.Counter;\r\n\r\n    Counters.Counter private _tokenIdCounter;\r\n",
+            "functions": "function safeMint(address to) public onlyOwner {\r\n        uint256 tokenId = _tokenIdCounter.current();\r\n        _tokenIdCounter.increment();\r\n        _safeMint(to, tokenId);\r\n    }\r\n"
+        },
+        "enumerable": {
+            "imports": "import \"@openzeppelin\/contracts\/token\/ERC721\/extensions\/ERC721Enumerable.sol\";\r\n",
+            "inheritance": [
+                "ERC721Enumerable"
+            ],
+            "lastFunctions": "function _beforeTokenTransfer(address from, address to, uint256 tokenId, uint256 batchSize)\r\n        internal\r\n        override(ERC721, ERC721Enumerable)\r\n    {\r\n        super._beforeTokenTransfer(from, to, tokenId, batchSize);\r\n    }\r\n\r\n    function supportsInterface(bytes4 interfaceId)\r\n        public\r\n        view\r\n        override(ERC721, ERC721Enumerable)\r\n        returns (bool)\r\n    {\r\n        return super.supportsInterface(interfaceId);\r\n    }\r\n"
+        },
+        "uriStorage": {
+            "imports": "import \"@openzeppelin\/contracts\/token\/ERC721\/extensions\/ERC721URIStorage.sol\";\r\n",
+            "inheritance": [
+                "ERC721URIStorage"
+            ],
+            "lastFunctions": "function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {\r\n        super._burn(tokenId);\r\n    }\r\n\r\n    function tokenURI(uint256 tokenId)\r\n        public\r\n        view\r\n        override(ERC721, ERC721URIStorage)\r\n        returns (string memory)\r\n    {\r\n        return super.tokenURI(tokenId);\r\n    }\r\n\r\n    function supportsInterface(bytes4 interfaceId)\r\n        public\r\n        view\r\n        override(ERC721, ERC721URIStorage)\r\n        returns (bool)\r\n    {\r\n        return super.supportsInterface(interfaceId);\r\n    }\r\n"
+        }
+    },
+    "erc1155": {
+        "features": [
+            "Mintable",
+            "Burnable",
+            "Supply Tracking",
+            "Pausable",
+            "Updatable URI"
+        ],
+        "mainImport": "import \"@openzeppelin\/contracts\/token\/ERC1155\/ERC1155.sol\";\r\n",
+        "constructorExt": "ERC1155",
+        "inheritance": [
+            "ERC1155"
+        ],
+        "supplyTracking": {
+            "imports": "import \"@openzeppelin\/contracts\/token\/ERC1155\/extensions\/ERC1155Supply.sol\";\r\n",
+            "inheritance": [
+                "ERC1155Supply"
+            ],
+            "lastFunctions": "function _beforeTokenTransfer(address operator, address from, address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data)\r\n        internal\r\n        override(ERC1155, ERC1155Supply)\r\n    {\r\n        super._beforeTokenTransfer(operator, from, to, ids, amounts, data);\r\n    }\r\n",
+            "functionComment": "\/\/ The following functions are overrides required by Solidity.\r\n"
+        }
+    }
+}
